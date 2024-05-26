@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const Balance = () => {
-  const balance = useSelector((state) => state.transactions.balance);
+  const balance = useSelector((state: RootState) => state.transactions.balance);
   return (
     <div className="text-center text-white h-[20%] flex flex-col justify-center">
       <p className="font-light mb-1">Available Balance</p>

@@ -1,18 +1,35 @@
 import { useSelector } from "react-redux";
 import { formatDateString } from "../utils/formatDateAndTime";
-
+import { RootState } from "../store/store";
+type TransactionItem = {
+  type: string;
+  category: string;
+  amount: number;
+  date: string; // Misalnya, "2024-05-26"
+  time: string;
+  note: string;
+};
 const Transaction = () => {
-  const transactions = useSelector((state) => state.transactions.transactions);
+  const transactions = useSelector(
+    (state: RootState) => state.transactions.transactions
+  );
 
   // Group transactions by date
-  const groupedTransactions = transactions.reduce((groups, transaction) => {
-    const date = transaction.date;
-    if (!groups[date]) {
-      groups[date] = [];
-    }
-    groups[date].push(transaction);
-    return groups;
-  }, {});
+  const groupedTransactions: { [key: string]: TransactionItem[] } =
+    transactions.reduce(
+      (
+        groups: { [key: string]: TransactionItem[] },
+        transaction: TransactionItem
+      ) => {
+        const date = transaction.date;
+        if (!groups[date]) {
+          groups[date] = [];
+        }
+        groups[date].push(transaction);
+        return groups;
+      },
+      {}
+    );
 
   return (
     <div className="p-4 h-full pb-20 overflow-auto">

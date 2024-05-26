@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import TransactionItem from "./TransactionItem";
 import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const RecentTransaction = () => {
-  const transactions = useSelector((state) => state.transactions.transactions);
+  const transactions = useSelector(
+    (state: RootState) => state.transactions.transactions
+  );
   const recentTransaction = [...transactions].reverse();
   return (
     <div className="h-full pb-12 pe-3 overflow-auto">
