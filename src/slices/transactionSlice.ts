@@ -32,8 +32,12 @@ const transactionSlice = createSlice({
         state.balance -= action.payload.amount;
       }
     },
+    resetAll: (state) => {
+      state.transactions = [];
+      state.balance = 0;
+    },
   },
 });
 
-export const { addTransaction } = transactionSlice.actions;
+export const { addTransaction, resetAll } = transactionSlice.actions;
 export default transactionSlice.reducer;
